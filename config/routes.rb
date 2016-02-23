@@ -6,4 +6,6 @@ Tshtask::Application.routes.draw do
     post :refresh_rates, on: :collection
     get :report, on: :member
   end
+  
+  get "*path" => redirect("/")
 end

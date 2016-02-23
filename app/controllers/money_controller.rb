@@ -11,9 +11,11 @@ class MoneyController < ApplicationController
 
   def show
     #show table of currencies for selected exchange rate
-    @exchange = Exchange.find(params[:id])
-    if @exchange.present?
+    @exchange = Exchange.find_by_id(params[:id])
+    if @exchange
       @currencies = @exchange.currencies.paginate(:page => params[:page], :per_page => 10)
+    else
+      redirect_to_rates_index
     end
   end
 
@@ -41,16 +43,19 @@ class MoneyController < ApplicationController
     #this method should be available only for currencies which exist in the database 
 
     @currency = Currency.find_by_id(params[:id])
-    @currency_history = Currency.currency_history(@currency).order(id: :desc)
-    @average_buy_price = @currency.average(:buy_price, @currency_history)
-    @average_sell_price = @currency.average(:sell_price, @currency_history)
-    @median_buy_price = @currency.median(:buy_price, @currency_history)
-    @median_sell_price = @currency.median(:sell_price, @currency_history)
-    #chart
-    @labels = Exchange.all.pluck(:name)
-    @sell_price_history = Currency.currency_history(@currency).order(id: :asc).pluck(:sell_price)
-    @buy_price_history = Currency.currency_history(@currency).order(id: :asc).pluck(:buy_price)
-
+    if @currency
+      @currency_history = Currency.currency_history(@currency).order(id: :desc)
+      @average_buy_price = @currency.average(:buy_price, @currency_history)
+      @average_sell_price = @currency.average(:sell_price, @currency_history)
+      @median_buy_price = @currency.median(:buy_price, @currency_history)
+      @median_sell_price = @currency.median(:sell_price, @currency_history)
+      #chart
+      @labels = Exchange.all.pluck(:name)
+      @sell_price_history = Currency.currency_history(@currency).order(id: :asc).pluck(:sell_price)
+      @buy_price_history = Currency.currency_history(@currency).order(id: :asc).pluck(:buy_price)
+    else
+      redirect_to_rates_index
+    end
   end
   
   private
@@ -58,6 +63,10 @@ class MoneyController < ApplicationController
   def set_exchanges
     @exchanges = Exchange.all.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
   end
-
+  
+  def redirect_to_rates_index
+    flash[:danger] = 'Wrong rate id!'
+    redirect_to action: "index"
+  end
 
 end
