@@ -1,0 +1,4 @@
+- if @exchange.present?
+  %tr.success
+    %td= @exchange.name
+    %td= link_to 'Show', money_path(@exchange), :class => 'btn btn-success'

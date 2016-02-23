@@ -1,0 +1,58 @@
+= javascript_tag do
+  window.cos = #{@sell_price_history};
+  
+.container
+  .row
+    .col-xs-1
+      = link_to 'Back', money_path(@currency.exchange), :class => 'btn btn-danger' 
+    .col-xs-3
+      %center.h2
+        History
+      %table.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th.col-xs-2
+              Date
+            %th.col-xs-1
+              Buy price
+            %th.col-xs-1
+              Sell price
+      .scrollable-table
+        %table.table.table-striped.table-bordered.table-hover
+          %tbody
+            - @currency_history.each do |c|
+              %tr
+                %td= c.exchange.name
+                %td= c.buy_price
+                %td= c.sell_price
+    .col-xs-8
+      .row
+        %center.h2 Statistics
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th.col-xs-2
+                Currency
+              %th.col-xs-1
+                Converter
+              %th.col-xs-1
+                Code
+              %th.col-xs-1
+                Average buy price
+              %th.col-xs-1
+                Average sell price
+              %th.col-xs-1
+                Median buy price
+              %th.col-xs-1
+                Median sell price
+          %tbody
+            %tr
+              %td= @currency.name
+              %td= @currency.converter
+              %td= @currency.code
+              %td= @average_buy_price
+              %td= @average_sell_price
+              %td= @median_buy_price
+              %td= @median_sell_price
+      .row
+        %canvas#chart{:labels => @labels, :sell_price_array => @sell_price_history, :buy_price_array => @buy_price_history}

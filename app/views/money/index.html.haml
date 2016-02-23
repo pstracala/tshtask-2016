@@ -1,0 +1,23 @@
+.col-xs-offset-3
+  .container
+    .row
+      .col-xs-2
+        = link_to 'Refresh rates', refresh_rates_money_index_path, :class => 'btn btn-default', remote: true, method: :post
+    %br
+    .row
+      .col-xs-6
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th.col-xs-4
+                Date
+              %th.col-xs-2
+                Actions
+          %tbody#rates_table
+            - if @exchanges.present?
+              - @exchanges.each do |ex|
+                %tr
+                  %td= ex.name
+                  %td= link_to 'Show', money_path(ex), :class => 'btn btn-success'
+        %center
+          = will_paginate @exchanges

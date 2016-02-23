@@ -1,0 +1,35 @@
+.col-xs-offset-3
+  .container
+    .row
+      .col-xs-2
+        = link_to 'Back', money_index_path, :class => 'btn btn-danger' 
+    %br
+    .row
+      .col-xs-6
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th.col-xs-2
+                Currency
+              %th.col-xs-1
+                Converter
+              %th.col-xs-1
+                Code
+              %th.col-xs-1
+                Buy price
+              %th.col-xs-1
+                Sell price
+              %th.col-xs-1
+                Actions
+          %tbody
+            - if @currencies.present?
+              - @currencies.each do |c|
+                %tr
+                  %td= c.name
+                  %td= c.converter
+                  %td= c.code
+                  %td= c.buy_price
+                  %td= c.sell_price
+                  %td= link_to 'Report', report_money_path(c), :class => 'btn btn-success'
+        %center
+          = will_paginate @currencies
