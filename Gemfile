@@ -20,9 +20,6 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'jquery-turbolinks'
 gem 'chart-js-rails'
 
-
-
-
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -37,6 +34,7 @@ group :development, :test do
 end
 group :production do
   gem 'unicorn'
+  gem 'rails_12factor'
 end
 group :test do
   gem 'capybara'
