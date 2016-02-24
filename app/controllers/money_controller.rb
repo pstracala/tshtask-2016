@@ -7,7 +7,6 @@ class MoneyController < ApplicationController
     #show list of exchange rates with creation time
     #don't forget about pagination
     set_exchanges
-    TestWorker.perform_async
   end
 
   def show
