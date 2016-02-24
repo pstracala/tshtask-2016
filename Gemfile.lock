@@ -234,6 +234,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks
+  nokogiri
   pg
   puma
   quiet_assets

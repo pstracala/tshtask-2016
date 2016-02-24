@@ -19,6 +19,9 @@ gem 'sidekiq'
 gem 'will_paginate', '~> 3.0.6'
 gem 'jquery-turbolinks'
 gem 'chart-js-rails'
+gem 'nokogiri'
+
+
 
 group :development do
   gem 'better_errors'
