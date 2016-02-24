@@ -13,3 +13,7 @@ development:
 test:
   <<: *common
   database: tshtask_test
+  
+production:
+  <<: *common
+  database: tshtask_production
