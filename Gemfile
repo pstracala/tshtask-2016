@@ -20,6 +20,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'jquery-turbolinks'
 gem 'chart-js-rails'
 gem 'nokogiri'
+gem "sidekiq-cron", "~> 0.4.0"
 
 
 
