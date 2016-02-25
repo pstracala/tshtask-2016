@@ -248,6 +248,7 @@ DEPENDENCIES
   rails (= 4.0.0)
   rails_12factor
   rails_layout
+  redis
   rspec-rails
   sass-rails (~> 4.0.0)
   sidekiq

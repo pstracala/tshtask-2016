@@ -21,7 +21,7 @@ gem 'jquery-turbolinks'
 gem 'chart-js-rails'
 gem 'nokogiri'
 gem "sidekiq-cron", "~> 0.4.0"
-
+gem 'redis'
 
 
 group :development do
