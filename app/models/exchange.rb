@@ -11,7 +11,7 @@ class Exchange < ActiveRecord::Base
     nbp_xml = get_nbp_xml
     date = nbp_xml.at_xpath('//data_publikacji').content
 
-    #return if Exchange.find_by_name(date)
+    return if Exchange.find_by_name(date)
     
     self.name = date
     nbp_xml.xpath('//pozycja').each do |record|

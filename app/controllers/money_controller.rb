@@ -1,8 +1,6 @@
 class MoneyController < ApplicationController
   before_filter :authenticate_user!
-
-
-
+  
   def index
     #show list of exchange rates with creation time
     #don't forget about pagination

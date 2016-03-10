@@ -1,1 +1,1 @@
-worker: bundle exec sidekiq -v -e production
+worker: bundle exec sidekiq -v -e production -L log/sidekiq.log

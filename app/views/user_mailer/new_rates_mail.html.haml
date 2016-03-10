@@ -1,0 +1,12 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome #{@user.email}.
+    %p
+      Exchange rates on XYZ.com have been updated.
+      %br/
+    %p
+      You can check it on:
+      = link_to 'Echange rates', money_url(@exchange)
