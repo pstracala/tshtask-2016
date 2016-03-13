@@ -54,9 +54,6 @@ describe MoneyController, :type => :controller do
   end
 
   describe "POST 'refresh_rates'" do
-    before do
-      
-    end
 
     it "should render refresh_rates_saved.js if saved" do
       post :refresh_rates, :format => 'js'
@@ -75,13 +72,30 @@ describe MoneyController, :type => :controller do
       }.to change(Exchange,:count).by(1)
     end
     
-    # it "should add new exchange" do
-    #   assigns(:exchanges).should eq([@exchange])
-    # end
-    # 
-    # it "renders the :index view" do
-    #   response.should render_template :index
-    # end
+  end
+
+  describe "POST 'refresh_rates'" do
+    before do
+      @currency = FactoryGirl.create(:currency, exchange_id: @exchange.id)
+      get :report, id: @currency.id
+    end
+
+    it "should be successful" do
+      response.should be_success
+    end
+
+    it "should find currency" do
+      assigns(:currency).should eq(@currency)
+    end
+
+    it "renders the :report view" do
+      response.should render_template :report
+    end
+
+    it "redirect to index when currency not find" do
+      get :report, id: 123
+      response.should redirect_to(money_index_path)
+    end
 
   end
 
