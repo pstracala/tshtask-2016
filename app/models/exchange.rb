@@ -3,10 +3,6 @@ class Exchange < ActiveRecord::Base
   require 'nokogiri'
   require 'open-uri'
   
-  def get_nbp_xml
-    Nokogiri::XML(open("http://www.nbp.pl/kursy/xml/LastC.xml"))
-  end
-
   def save_current_rates
     nbp_xml = get_nbp_xml
     date = nbp_xml.at_xpath('//data_publikacji').content
@@ -18,6 +14,12 @@ class Exchange < ActiveRecord::Base
       self.currencies.new(parse_rates(record))
     end
     save
+  end
+    
+  private
+  
+  def get_nbp_xml
+    Nokogiri::XML(open("http://www.nbp.pl/kursy/xml/LastC.xml"))
   end
 
   def parse_rates(record)
